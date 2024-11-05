@@ -104,6 +104,7 @@ print_array3:
 
 input_elements:
 	li $v0, 4
+	li $s1, 0
 	la $a0, msg_select_index
 	syscall
 	
@@ -116,19 +117,16 @@ user_input_elements:
 check_array3:		
 	lw $s0, size3
 	subi $s0, $s0, 1
-	li $s1, 0
 	j user_input
 	
 check_array1:
 	lw $s0, size1
 	subi $s0, $s0, 1
-	li $s1, 0
 	j user_input
 	
 check_array2:
 	lw $s0, size2
 	subi $s0, $s0, 1
-	li $s1, 0
 	j user_input
 
 # User nhap N
@@ -139,7 +137,6 @@ user_input:
 	
 # Kiem tra N thuoc tu 1 den 3, nhap khac se bao nhap lai
 check_N:
-	#Neu >3 or <1 thi nhap lai
 	bgt $t0, $s0, print_loop
 	blt $t0, $s1, print_loop
 	
