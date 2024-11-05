@@ -33,24 +33,30 @@ input_msg_loop:
 	j input_n_loop
 	
 input_value:
+	la $s3, array
 	la $t1, array
 	li $t2, 0
 	xor $t6, $t6, $t6
 	
 input_loop:
 	beq $t2, $t0, check_ij
+	
+	# A[
 	li $v0, 4
 	la $a0, msg_input_value
 	syscall
 	
+	# i
 	li $v0, 1
 	move $a0, $t2
 	syscall
 	
+	# ]: 
 	li $v0, 4
 	la $a0, msg_input_v
 	syscall
 	
+	# Nhap gia tri
 	li $v0, 5
 	syscall
 	sw $v0, 0($t1)
@@ -107,18 +113,22 @@ update_Ai:
 	sw $s0, 0($t1)
 	
 print: 
+	# \n
 	li $v0, 4
 	la $a0, msg_enter
 	syscall
 	
+	# A[
 	li $v0, 4
 	la $a0, msg_input_value
 	syscall
 	
+	# i
 	li $v0, 1
 	move $a0, $s0
 	syscall
 	
+	# ]:
 	li $v0, 4
 	la $a0, msg_input_v
 	syscall

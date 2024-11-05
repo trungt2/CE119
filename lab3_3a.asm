@@ -36,18 +36,22 @@ input_value:
 	
 input_loop:
 	beq $t2, $t0, max_min
+	# A[
 	li $v0, 4
 	la $a0, msg_input_value
 	syscall
 	
+	# i
 	li $v0, 1
 	move $a0, $t2
 	syscall
 	
+	# ]: 
 	li $v0, 4
 	la $a0, msg_input_v
 	syscall
 	
+	# Nhap gia tri
 	li $v0, 5
 	syscall
 	sw $v0, 0($t1)
@@ -62,6 +66,7 @@ max_min:
 	move $t4, $t3	# max = t3
 	move $t5, $t3	# min = t3
 	li $t2, 1	# i= 1
+	add $t1, $t1, 4
 	
 mm_loop:
 	add $t6, $t6, $t3	# Tinh tong cac phan tu
