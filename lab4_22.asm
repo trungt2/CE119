@@ -5,8 +5,8 @@ msg_input_2: 	.asciiz " is : "
 msg_error_input:.asciiz "Nhap sai, nhap lai\n"
 
 data_in_1:	.space 10
-data_in_2:	.space 1000
-data_out: 	.space 1000
+data_in_2:	.space 10000
+data_out: 	.space 10000
 
 size1:		.word 1
 size2: 		.word 1
@@ -54,6 +54,7 @@ done_input:
 #---------------------------------------------------	
 # t0: data 
 # t2: size
+# a2: value
 TachN:
 	li $a1, 10
 	li $a3, 0 # count = 0
@@ -210,10 +211,6 @@ factorial_out:
 	move $ra, $s0
 	
 	jr $ra
-
-#===================================================================
-print_size:
-
 #------------------------------------------------------------------
 Nhan:
 	# a1 = size1
