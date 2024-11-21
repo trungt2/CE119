@@ -5,6 +5,7 @@ msg_error_input: 	.asciiz "Nhap sai, nhap lai: "
 # Output
 msg_out1:		.asciiz "Fibonanci of "
 msg_out2:		.asciiz " is: "
+msg_out3:		.asciiz "\nSize: "
 # Data
 data_in_1:	.space 10000
 data_in_2:	.space 10000
@@ -80,10 +81,10 @@ CongFibo:
 	
 CongFibo_loop:
 	beq $s0, $zero, out_CongFibo
-	
+	# C[i] = A[i] + B[i]
 	lb $s1, 0($t0)
 	lb $s2, 0($t1)
-	add $a1, $s1, $s2 # C[i] = A[i] + B[i]
+	add $a1, $s1, $s2 
 	
 	# if C[i]< 10 => Giu nguyen
 	blt $a1, 10, GiuNguyen
@@ -94,18 +95,17 @@ CongFibo_loop:
 	mfhi $a1	# Du
 	mflo $v0	# Thuong
 	
-	# Them phan /10 vao data_temp[i+1]
+	# A[i+1] = A[i+1] + C[i]/10
 	lb $s3, 1($t0)
 	add $s3, $s3, $v0
 	sb $s3, 1($t0)
-	
 	
 	bne $s0, 1, GiuNguyen 	# if s0 != 1 => Giu nguyen
 	# if s0 == 1 => size2++
 	la $a3, size2
 	lb $s3, 0($a3)
 	addi $s3, $s3, 1
-	sb $s3, 0($a3)
+	sb $s3, 0($a3) 
 	# s0++ (Dem them 1 lan)
 	addi $s0, $s0, 1
 	
@@ -113,10 +113,10 @@ GiuNguyen:
 	sb $a1, 0($t1)	# A[i] = B[i]
 	sb $s2, 0($t0)	# B[i] = C[i]%10
 	
+	# Address++
 	addi $t0, $t0, 1
 	addi $t1, $t1, 1
-	addi $t2, $t2, 1
-	
+	# s0--
 	subi $s0, $s0, 1
 	j CongFibo_loop
 	
@@ -146,6 +146,16 @@ print:
 	la $a2, size2
 	jal print_data
 	move $ra, $s0
+	
+	# print size
+	li $v0, 4
+	la $a0, msg_out3
+	syscall
+	
+	li $v0, 1
+	la $a1, size2
+	lw $a0, 0($a1)
+	syscall
 	
 	jr $ra
 #-------------------------------------------------

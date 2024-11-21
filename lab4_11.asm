@@ -5,7 +5,7 @@ out:	.asciiz "Gia tri cua so int nhap: "
 main:
 	jal getInt
 	move $s0, $v0
-	
+	j exit
 	jal showInt
 	j exit
 	
@@ -16,7 +16,6 @@ getInt:
 	
 	li $v0, 5
 	syscall
-	addi $v0, $v0, 1
 	
 	jr $ra
 	

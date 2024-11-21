@@ -3,6 +3,7 @@ msg_input_n: 	.asciiz "Nhap n(n>0): "
 msg_input_1: 	.asciiz "The factorial of "
 msg_input_2: 	.asciiz " is : "
 msg_error_input:.asciiz "Nhap sai, nhap lai\n"
+msg_out3:	.asciiz "\nSize: "
 
 data_in_1:	.space 10
 data_in_2:	.space 10000
@@ -333,6 +334,16 @@ print:
 	la $a1, data_in_2
 	la $a2, size2
 	jal print_data
+	
+	# print size
+	li $v0, 4
+	la $a0, msg_out3
+	syscall
+	
+	li $v0, 1
+	la $a1, size2
+	lw $a0, 0($a1)
+	syscall
 	
 	move $ra, $s0
 	jr $ra
