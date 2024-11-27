@@ -4,12 +4,19 @@
 	li $s1, 3
 	li $s2, 4
 	li $s3, 5
+	
+	li $s4, 6
+	li $s5, 7
 
 main:
 	move $a0, $s0
 	move $a1, $s1
 	move $a2, $s2
 	move $a3, $s3
+	
+	move $t2, $s4 #e
+	move $t3, $s5 #f
+	
 	jal proc_example
 	
 	move $a0, $v0
@@ -31,12 +38,8 @@ proc_example:
 	# z = x - y
 	sub $s0, $t0, $t1
 	
-	# x = (a - b)
-	sub $t0, $a0, $a1
-	# y = (c - d)
-	sub $t1, $a2, $a3
-	# t = x + y
-	add $s1, $t0, $t1
+	# s1 = e - f
+	sub $s1, $t2, $t3
 	
 	# return global value
 	move $v0, $s0

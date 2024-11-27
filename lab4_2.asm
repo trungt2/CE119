@@ -2,6 +2,7 @@
 msg_input_n: 	.asciiz "Nhap n(n>0): "
 msg_input_1: 	.asciiz "The factorial of "
 msg_input_2: 	.asciiz " is : "
+msg_input_error:.asciiz "Nhap sai, vui long nhap lai: "
 
 data: 	.space 100
 
@@ -23,11 +24,20 @@ input:
 	li $v0, 4
 	la $a0, msg_input_n
 	syscall
-	
+
+input_again:
 	# Nhap n
 	li $v0, 5
 	syscall
-		
+	
+	bgt $v0, $zero, out_input
+	
+	li $v0, 4
+	la $a0, msg_input_error
+	syscall
+	
+	j input_again
+out_input:
 	jr $ra
 	
 factorial:
@@ -35,7 +45,7 @@ factorial:
 	ble $a0, 1, factorial_out 
 	
 	# Push 2 stack
-	addi $sp, $sp, -8 # Khoi tao 2 stack 
+	addi $sp, $sp, -12 # Khoi tao 2 stack 
 	sw $a0, 0($sp)
 	sw $ra, 4($sp)
 	
@@ -45,11 +55,14 @@ factorial:
 	
 	# pop $ra, n
 	lw $a0, 0($sp)
-	lw $ra, 4($sp)
-	addi $sp, $sp, 8
+	
 	
 	# n * f(n-1)
 	mulu $v0, $v0, $a0
+	
+	lw $ra, 4($sp)
+	sw $v0, 8($sp) # Save F(n) to stack
+	addi $sp, $sp, 12
 	
 	jr $ra
 	
