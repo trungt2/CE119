@@ -1,0 +1,211 @@
+:root {
+    /* Light mode colors */
+    --bg-primary: #f4f6f9;
+    --bg-secondary: #ffffff;
+    --bg-input: #f0f4f8;
+    --text-primary: #2c3e50;
+    --text-secondary: #34495e;
+    --border-color: #bdc3c7;
+    --button-bg: #3498db;
+    --button-hover: #2980b9;
+    --output-bg: #ecf0f1;
+    --input-focus: #a8c0ff;
+}
+
+/* Dark mode colors */
+.dark-mode {
+    --bg-primary: #121620;
+    --bg-secondary: #1c2331;
+    --bg-input: #212738;
+    --text-primary: #e6e6e6;
+    --text-secondary: #b0b8c4;
+    --border-color: #394562;
+    --button-bg: #4a90e2;
+    --button-hover: #5fa6e9;
+    --output-bg: #2c3545;
+    --input-focus: #5e81ac;
+}
+
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: 
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Container styles */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 30px;
+    background: var(--bg-secondary);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+/* Theme toggle */
+.theme-toggle-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+#theme-toggle {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: 
+        transform 0.3s ease,
+        opacity 0.3s ease;
+}
+
+#theme-toggle:hover {
+    opacity: 1;
+    transform: rotate(180deg);
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--text-primary);
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+/* Form styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+}
+
+.code-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    width: 100%;
+}
+
+.code-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+    font-size: 0.9rem;
+    resize: vertical;
+    min-height: 350px;
+    line-height: 1.5;
+    transition: 
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--input-focus);
+    box-shadow: 0 0 0 3px rgba(90, 129, 172, 0.2);
+}
+
+textarea#output-box {
+    background-color: var(--output-bg);
+    cursor: not-allowed;
+    opacity: 0.9;
+}
+
+/* Button styles */
+button {
+    padding: 12px 28px;
+    background-color: var(--button-bg);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: 
+        background-color 0.3s ease,
+        transform 0.2s ease,
+        box-shadow 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--button-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .code-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .code-box {
+        width: 100%;
+    }
+
+    textarea {
+        min-height: 250px;
+    }
+}
+
+/* Scrollbar styles (optional) */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-input);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+}
